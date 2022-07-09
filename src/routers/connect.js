@@ -24,13 +24,25 @@ router.get("/newPhone/:code", async (req, res) => {
     }
     const phone = new Phone({ laptop: laptop._id });
     laptop.phone = phone._id;
-    console.log(phone);
     await laptop.save();
     await phone.save();
     res.status(201).send({ phone });
   } catch (e) {
     console.log(e);
     res.status(400).send(e);
+  }
+});
+
+router.patch("/updateLaptop", async (req, res) => {
+  try {
+    const laptop = await Laptop.findOne({
+      _id: req.body.laptop._id,
+    });
+    laptop.locked = req.body.laptop.locked;
+    await laptop.save();
+    res.send(laptop);
+  } catch (e) {
+    res.status(400).send({ error: "Update failed" });
   }
 });
 

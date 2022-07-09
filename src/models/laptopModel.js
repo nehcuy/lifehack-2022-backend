@@ -11,6 +11,7 @@ const laptopSchema = new mongoose.Schema({
   phone: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Phone",
+    default: null,
   },
   locked: {
     type: Boolean,

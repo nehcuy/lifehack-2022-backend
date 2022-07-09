@@ -14,4 +14,24 @@ router.post("/newLaptop", async (req, res) => {
   }
 });
 
+router.get("/newPhone/:code", async (req, res) => {
+  try {
+    const laptop = await Laptop.findOne({
+      code: req.params.code,
+    });
+    if (laptop == null) {
+      throw new Error("Invalid code");
+    }
+    const phone = new Phone({ laptop: laptop._id });
+    laptop.phone = phone._id;
+    console.log(phone);
+    await laptop.save();
+    await phone.save();
+    res.status(201).send({ phone });
+  } catch (e) {
+    console.log(e);
+    res.status(400).send(e);
+  }
+});
+
 module.exports = router;

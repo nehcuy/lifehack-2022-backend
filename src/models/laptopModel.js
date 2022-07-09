@@ -17,6 +17,10 @@ const laptopSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  moved: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Laptop = mongoose.model("Laptop", laptopSchema);

@@ -18,6 +18,15 @@ app.use(express.json());
 app.use(cors());
 app.use("/connect", connectRouter);
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-Wtih, Content-Type, Accept"
+  );
+  next();
+});
+
 // const socketRouter = require("./routers/SocketRouter")(io);
 // app.use("/socket", socketRouter);
 
